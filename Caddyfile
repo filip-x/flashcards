@@ -1,0 +1,20 @@
+{
+    # Global options
+    email your-email@example.com
+}
+
+# Replace with your domain (e.g., flashcards.your-tailnet.ts.net)
+# Or use :80 for local network access
+:80 {
+    # Serve static files from the built frontend
+    root * /srv
+    file_server
+
+    # Reverse proxy API requests to the backend container
+    handle_path /api/* {
+        reverse_proxy backend:8000
+    }
+
+    # Handle client-side routing (SPA)
+    try_files {path} /index.html
+}
