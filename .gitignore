@@ -1,0 +1,8 @@
+frontend/node_modules
+.env
+.venv
+.pytest_cache
+alembic/__pycache__
+app/__pycache__
+frontend/dist
+tests/__pycache__
