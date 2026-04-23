@@ -27,10 +27,16 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    volumes:
-      - .:/app
     ports:
       - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    container_name: flashcards_frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
 
 volumes:
   pgdata:
