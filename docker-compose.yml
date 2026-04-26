@@ -1,32 +1,14 @@
 services:
-  db:
-    image: postgres:16-alpine
-    container_name: flashcards_db
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_DB: ${POSTGRES_DB:-flashcards}
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
   backend:
     build: .
     container_name: flashcards_backend
     environment:
-      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-flashcards}
+      - DATABASE_URL=sqlite+aiosqlite:///./flashcards.db
       - GROQ_API_KEY=${GROQ_API_KEY}
       - GROQ_MODEL=${GROQ_MODEL:-llama-3.1-8b-instant}
       - GROQ_BASE_URL=${GROQ_BASE_URL:-https://api.groq.com/openai/v1}
-    depends_on:
-      db:
-        condition: service_healthy
+    volumes:
+      - ./flashcards.db:/app/flashcards.db
     ports:
       - "8000:8000"
 
@@ -38,6 +20,4 @@ services:
     depends_on:
       - backend
 
-volumes:
-  pgdata:
 
