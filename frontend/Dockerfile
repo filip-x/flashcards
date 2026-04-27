@@ -11,6 +11,11 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Add default nginx config to handle SPA routing if needed
 RUN echo 'server { \
     listen 80; \
+    location /api/ { \
+        proxy_pass http://backend:8000/api/; \
+        proxy_set_header Host $host; \
+        proxy_set_header X-Real-IP $remote_addr; \
+    } \
     location / { \
         root /usr/share/nginx/html; \
         index index.html; \
