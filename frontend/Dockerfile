@@ -11,11 +11,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Add default nginx config to handle SPA routing if needed
 RUN echo 'server { \
     listen 80; \
-    listen 443 ssl; \
     server_name localhost; \
-    \
-    ssl_certificate /etc/nginx/certs/nginx-selfsigned.crt; \
-    ssl_certificate_key /etc/nginx/certs/nginx-selfsigned.key; \
     \
     # Increased client_max_body_size for document uploads \
     client_max_body_size 20M; \
