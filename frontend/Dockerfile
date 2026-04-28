@@ -22,6 +22,21 @@ RUN echo 'server { \
         proxy_set_header X-Forwarded-Proto $scheme; \
     } \
     \
+    location /flashcards/docs { \
+        proxy_pass http://backend:8000/docs; \
+        proxy_set_header Host $host; \
+    } \
+    \
+    location /flashcards/redoc { \
+        proxy_pass http://backend:8000/redoc; \
+        proxy_set_header Host $host; \
+    } \
+    \
+    location /flashcards/openapi.json { \
+        proxy_pass http://backend:8000/openapi.json; \
+        proxy_set_header Host $host; \
+    } \
+    \
     location /flashcards/ { \
         alias /usr/share/nginx/html/; \
         index index.html; \
