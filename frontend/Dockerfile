@@ -11,15 +11,25 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Add default nginx config to handle SPA routing if needed
 RUN echo 'server { \
     listen 80; \
-    location /api/ { \
+    # Increased client_max_body_size for document uploads \
+    client_max_body_size 20M; \
+    \
+    location /flashcards/api/ { \
         proxy_pass http://backend:8000/api/; \
         proxy_set_header Host $host; \
         proxy_set_header X-Real-IP $remote_addr; \
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; \
+        proxy_set_header X-Forwarded-Proto $scheme; \
     } \
-    location / { \
-        root /usr/share/nginx/html; \
+    \
+    location /flashcards/ { \
+        alias /usr/share/nginx/html/; \
         index index.html; \
-        try_files $uri $uri/ /index.html; \
+        try_files $uri $uri/ /flashcards/index.html; \
+    } \
+    \
+    location / { \
+        return 301 /flashcards/; \
     } \
 }' > /etc/nginx/conf.d/default.conf
 

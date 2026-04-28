@@ -1,4 +1,4 @@
-const API_BASE = '/api/v1';
+const API_BASE = '/flashcards/api/v1';
 
 /**
  * Handles all backend interaction.
