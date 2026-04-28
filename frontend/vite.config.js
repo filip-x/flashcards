@@ -6,9 +6,34 @@ export default defineConfig({
   base: '/flashcards/',
   plugins: [react()],
   server: {
+    host: '0.0.0.0',
     proxy: {
-      '/api': {
-        target: 'http://localhost:8000',
+      '/flashcards/api': {
+        target: 'http://backend:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/flashcards\/api/, '/api'),
+      },
+    },
+  },
+  preview: {
+    host: '0.0.0.0',
+    port: 80,
+    proxy: {
+      '/flashcards/api': {
+        target: 'http://backend:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/flashcards\/api/, '/api'),
+      },
+      '/flashcards/docs': {
+        target: 'http://backend:8000',
+        changeOrigin: true,
+      },
+      '/flashcards/redoc': {
+        target: 'http://backend:8000',
+        changeOrigin: true,
+      },
+      '/flashcards/openapi.json': {
+        target: 'http://backend:8000',
         changeOrigin: true,
       },
     },
