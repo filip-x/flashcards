@@ -68,7 +68,7 @@ const Dashboard = ({ onStartReview, onReviewNew, onBrowseCard }) => {
           <p className="text-secondary">Continuous adaptive learning driven by your feedback.</p>
         </div>
 
-        <div style={{ display: 'flex', gap: '1rem' }}>
+        <div className="dashboard-actions">
           {pendingCount > 0 && (
             <button 
               className="btn btn-secondary"
@@ -107,7 +107,7 @@ const Dashboard = ({ onStartReview, onReviewNew, onBrowseCard }) => {
         </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
+      <div className="library-header">
         <h3 style={{ fontFamily: 'Outfit' }}>Library</h3>
         {totalCards > 0 && (
           <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>

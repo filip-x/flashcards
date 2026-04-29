@@ -107,8 +107,8 @@ const UploadSection = ({ onGenerationSuccess }) => {
       </div>
 
       {selectedFile && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '600px' }}>
-          <div className="file-info glass-panel" style={{ width: '100%' }}>
+        <div className="file-selection-container">
+          <div className="file-info glass-panel">
             <FileText size={24} color="var(--accent-cyan)" />
             <div style={{ textAlign: 'left', flex: 1 }}>
               <div style={{ fontWeight: 600 }}>{selectedFile.name}</div>

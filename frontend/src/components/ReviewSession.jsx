@@ -115,7 +115,7 @@ const ReviewSession = ({ onFinish }) => {
           </div>
 
           {/* Back */}
-          <div className="card-face card-back glass-panel" style={{ overflowY: 'auto', alignItems: 'flex-start', textAlign: 'left', padding: '2.5rem' }}>
+          <div className="card-face card-back glass-panel">
             <div className="markdown-content" style={{ color: 'var(--accent-cyan)', lineHeight: '1.7', fontSize: '1.05rem', width: '100%' }}>
               <ReactMarkdown>{currentCard.answer}</ReactMarkdown>
             </div>
@@ -125,7 +125,7 @@ const ReviewSession = ({ onFinish }) => {
       </div>
 
       <div className={`grading-actions ${isFlipped ? 'visible' : ''}`}>
-        <p className="text-secondary" style={{ marginBottom: '1rem' }}>How easy was it to recall?</p>
+        <p className="text-secondary grading-label">How easy was it to recall?</p>
         <div className="grade-buttons">
           <button className="grade-btn" data-grade="0" onClick={() => handleGrade(0)}>
             <span className="grade-num">0</span>
